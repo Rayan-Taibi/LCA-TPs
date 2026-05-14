@@ -47,5 +47,8 @@ void test_heap() {
 int main(){
     test_stack();
     test_heap();
+
+    // en résumé la pile et le tas groississent dans des directions opposées : la pile "descend" vers des adresses plus petites, tandis que le tas "monte" vers des adresses plus grandes.
+    // pour éviter de se rentrer dedans trop vite, les systèmes d'exploitation allouent généralement une grande quantité de mémoire pour la pile et le tas, et ils peuvent également utiliser des techniques de protection de la mémoire pour empêcher les débordements de pile ou de tas.
     return 0;
 }
