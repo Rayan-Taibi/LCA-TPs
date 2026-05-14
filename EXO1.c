@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdarg.h>
-
+#include<string.h>
 void printAdr(int nbr , ...){
 
     va_list args;
@@ -75,8 +75,13 @@ void myprintf(const char *format , ...){
                   fwrite(&format[i] , sizeof(char) , 1, stdout);// affiche le caractère suivant
                   break;
             }
+            // après le switch, on continue à la prochaine itération de la boucle while, ce qui permet de traiter le caractère suivant dans la chaîne de format.
+        } else {
+            fwrite(&format[i] , sizeof(char) , 1, stdout);
         }
+       i++;
     }
+    va_end(args);
 
 }
 
@@ -85,5 +90,13 @@ void myprintf(const char *format , ...){
 
 
 int main(){
+
+    int a = 5;
+    int b = 10;
+    int c = 15;
+    printAdr(3 , &a , &b , &c);
+    initInts(3 , &a , 20 , &b , 30 , &c , 40);
+    printf("a = %d , b = %d , c = %d\n" , a , b , c);
+    myprintf("Hello %s , a = %d , b = %x , c = %o , f = %f\n" , "world" , a , b , c , 3.14);
 
 }
