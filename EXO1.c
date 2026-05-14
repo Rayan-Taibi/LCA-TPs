@@ -29,11 +29,10 @@ void initInts(int nb_couple , ...){
 
 void myprintf(const char *format , ...){
     va_list args;
-    va_start(args , format);
-    char buffer;
+    va_start(args , format); 
     int i = 0;
     while(format[i] != '\0'){
-        if(format[i] == '%' && format[i+1] == '\0'){
+        if(format[i] == '%' && format[i+1] != '\0'){
             i++;
             char tmp[128];
             switch(format[i]){
@@ -50,6 +49,18 @@ void myprintf(const char *format , ...){
                 case 'd':{
                     int d = va_arg(args , int);
                     sprintf(tmp , "%d" , d); // convertit l'entier d en une chaine de caractères 
+                    fwrite(tmp , sizeof(char) , strlen(tmp) , stdout);
+                    break;
+                }
+                case 'x' : {
+                    int x = va_arg(args , int);
+                    sprintf(tmp , "%x" , x); // convertit l'entier x en une chaine de caractères hexadécimale
+                    fwrite(tmp , sizeof(char) , strlen(tmp) , stdout);
+                    break;
+                }
+                case 'o':{
+                    int o = va_arg(args , int);
+                    sprintf(tmp , "%o" , o); // convertit l'entier o en une chaine de caractères octale
                     fwrite(tmp , sizeof(char) , strlen(tmp) , stdout);
                     break;
                 }
