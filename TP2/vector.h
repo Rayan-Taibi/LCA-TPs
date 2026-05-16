@@ -59,7 +59,7 @@ int vectorCompare(IntVector *const vector1, IntVector *const vector2);
 int vectorCopy(IntVector *const vectorDest, const IntVector *const vectorSrc);
 
 // Fait en sorte que la capacite de 'vector' soit egale a sa taille
-// Gere la memoire en consequence
+// Gere la memoire en consequence 
 void vectorShrinkToFit(IntVector *const vector);
 
 // Retire l'element 'i' de 'vector' (data)

@@ -48,8 +48,10 @@ int vectorPushBack(IntVector *vector, const int x){
     return 0;
 }
 int vectorPopBack(IntVector *const vector){
-    return vector->data[vector->size];
-     vector->size--; // on reduit la taille du vector
+    if(vector->size == 0)return -1; // si le vector est vide on retourne -1
+    int x = vector->data[vector->size - 1]; // on stocke la valeur a supprimer
+    vector->size--; // on reduit la taille du vector
+    return x;
 }
 void vectorReset(IntVector *const vector){
     for (int i = 0 ; i < vector ->size ; i++ ){
@@ -59,5 +61,37 @@ void vectorReset(IntVector *const vector){
     // memset(vector->data , 0 , vector->size * sizeof(int));
 }
 int vectorCompare(IntVector *const vector1, IntVector *const vector2){
-    
+    if(vector1->size < vector2->size)return -1;
+    if(vector1->size > vector2->size)return 1;
+    for(int i = 0 ; i < vector1->size ; i++){
+        if(vector1->data[i] < vector2->data[i])return -1;
+        if(vector1->data[i] > vector2->data[i])return 1;
+    }
+    return 0; // si les deux vectors sont egaux
+}
+int vectorCopy(IntVector *const vectorDest, const IntVector *const vectorSrc){
+    int *tmp = malloc(vectorSrc->capacity * sizeof(int)); // on alloue de la memoire pour le vector destination
+    if(!tmp)return -1;
+    vectorDest->data = tmp; // on affecte le pointeur vers la memoire allouee au vector destination
+    vectorDest->size = vectorSrc->size; // on copie la taille du vector source
+    vectorDest->capacity = vectorSrc->capacity; // on copie la capacite du vector source
+    for(int i = 0 ; i < vectorSrc->size ; i++){ // on copie les elements du vector source dans le vector destination
+        vectorDest->data[i] = vectorSrc->data[i];
+    }
+    return 0;
+}
+void vectorShrinkToFit(IntVector *const vector){
+    if(vector->size == vector->capacity)return;
+    int *tmp = realloc(vector->data, vector->size * sizeof(int)); // on realloue la memoire pour que la capacite soit egale a la taille
+    if(tmp){
+        vector->data = tmp;
+        vector->capacity = vector->size;
+    }
+}
+
+void vectorRemove(IntVector *vector, const int i){
+    for(int j = i ; j < vector -> size ; j++){
+        vector -> data[j] = vector -> data[j + 1]; // on decale les elements a gauche pour supprimer l'element i
+    }
+    vector->size--; // on reduit la taille du vector
 }
