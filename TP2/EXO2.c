@@ -4,7 +4,7 @@
 void printMemoryRepresentation(void *ptr , size_t size ){
    char *p = (char *)ptr;
    for(int i = 0 ; i < size ; i++){
-      printf("%.2x " , p[i]);
+      printf("%.2x " , p[i]); // on affiche chaque octet en hexadécimal avec 2 chiffres (%.2x) pour avoir une représentation claire de la mémoire, et on ajoute un espace entre chaque octet pour faciliter la lecture
    }
    printf("\n");
 

@@ -19,7 +19,7 @@ void test_stack() {
 
     printf("--- PILE (STACK) ---\n");
     printf("Adresse de a : %p\n",(void*) &a); // on utilise (void*) pour éviter les warnings de format de printf sinon elle marche aussi mais c'est mieux de faire ça pour être sûr que le format est correct
-    printf("Adresse de b : %p\n", (void*)&b);
+    printf("Adresse de b : %p\n", (void*)&b);//%p est le format pour afficher une adresse mémoire, et (void*) est utilisé pour convertir l'adresse en un pointeur générique, ce qui est nécessaire pour éviter les warnings de format de printf.
     printf("Adresse de c : %p\n", (void*)&c);
 
     //Les adresses sont très proches les unes des
@@ -52,3 +52,5 @@ int main(){
     // pour éviter de se rentrer dedans trop vite, les systèmes d'exploitation allouent généralement une grande quantité de mémoire pour la pile et le tas, et ils peuvent également utiliser des techniques de protection de la mémoire pour empêcher les débordements de pile ou de tas.
     return 0;
 }
+//dans .bss on trouve les variables globales non initialisées, dans .data on trouve les variables globales initialisées, dans .rodata on trouve les données en lecture seule (comme les constantes), et dans .text on trouve le code exécutable du programme.
+//dans stack on trouve les variables locales et les paramètres de fonction, tandis que dans heap on trouve la mémoire allouée dynamiquement.
